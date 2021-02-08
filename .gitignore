@@ -6,3 +6,7 @@ build
 .idea
 FeaturesReport.html
 *.iml
+gradle
+.gitattributes
+gradlew
+gradlew.bat
