@@ -1,4 +1,4 @@
-# crypto_hybrid_system_diffie_hellman
+# A hybrid crypto system based on Diffie Hellman
 This sample is a hybrid crypto based on Diffie Hellman. I create this projet to:
 * Understand and implement a hybrid crypto system 
 * Understand and test Diffie Hellman
