@@ -48,6 +48,10 @@ Feature: Elliptic Curve and Diffie Hellman
       | sQezmSLKaYeak5fKF2xJSA== | Yoyoy     |
 
 ```
+The following image is the output of the  previous code.
+
+![The output of Gherkin code](/screenshots/bdd_output.png?raw=true "The output of Gherkin code")
+
 
 
 
