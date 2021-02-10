@@ -24,7 +24,7 @@ import javax.crypto.KeyAgreement
  **/
 
 @Suppress("NewApi")
-class DataEncryptRepositoryImpl(private val serverPublicKey: String,
+class DataEncryptRepositoryImpl(private val serverPublicKey: ServerPublicKey,
                                 private val keyPairLocalDataStore: KeyPairLocalDataStore,
                                 private val coroutineDispatchers: CoroutineDispatchers
 ) : DataEncryptRepository {
@@ -45,7 +45,7 @@ class DataEncryptRepositoryImpl(private val serverPublicKey: String,
 
     private suspend fun sharedSecretKey() = withContext(coroutineDispatchers.io) {
         val keyFactory: KeyFactory = KeyFactory.getInstance(KEY_PAIR_TYPE)
-        val publicSpec = X509EncodedKeySpec(Base64.getDecoder().decode(serverPublicKey))
+        val publicSpec = X509EncodedKeySpec(Base64.getDecoder().decode(serverPublicKey.value))
         val serverKey = keyFactory.generatePublic(publicSpec)
 
         val agreement: KeyAgreement = KeyAgreement.getInstance(KEY_PAIR_TYPE, "BC")

@@ -21,11 +21,14 @@ internal class DataDecryptRepositoryImplTest{
 
     private lateinit var repo: DataDecryptRepositoryImpl
     private lateinit var localStore: KeyPairLocalDataStore
+    private lateinit var serverPublicKey: ServerPublicKey
 
     @Before
     fun beforeAll() {
         localStore = mockk()
-        repo = DataDecryptRepositoryImpl(FakeData.publicKey, CoroutineDispatchersImpl(), localStore)
+        serverPublicKey = mockk()
+        repo = DataDecryptRepositoryImpl(serverPublicKey, CoroutineDispatchersImpl(), localStore)
+        coEvery { serverPublicKey.value } returns FakeData.publicKey
         coEvery { localStore.getPrivateKeyAsString() } returns FakeData.privateKey
     }
 

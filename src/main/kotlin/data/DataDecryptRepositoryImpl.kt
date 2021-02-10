@@ -30,7 +30,7 @@ import javax.crypto.spec.IvParameterSpec
  **/
 
 @Suppress("NewApi")
-class DataDecryptRepositoryImpl(private val serverPublicKeyAsString: String,
+class DataDecryptRepositoryImpl(private val serverPublicKeyAsString: ServerPublicKey,
                                 private val coroutineDispatchers: CoroutineDispatchers,
                                 private val keyPairLocalDataStore: KeyPairLocalDataStore
 ) : DataDecryptRepository {
@@ -48,7 +48,7 @@ class DataDecryptRepositoryImpl(private val serverPublicKeyAsString: String,
     }
 
     private suspend fun serverPublicKey() = withContext(coroutineDispatchers.io) {
-        val publicSpec = X509EncodedKeySpec(Base64.getDecoder().decode(serverPublicKeyAsString))
+        val publicSpec = X509EncodedKeySpec(Base64.getDecoder().decode(serverPublicKeyAsString.value))
         val keyFactory: KeyFactory = KeyFactory.getInstance(KEY_PAIR_TYPE)
         keyFactory.generatePublic(publicSpec)
     }

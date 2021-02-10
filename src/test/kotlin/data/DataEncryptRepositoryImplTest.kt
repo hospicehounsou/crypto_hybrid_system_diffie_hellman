@@ -19,12 +19,15 @@ internal class DataEncryptRepositoryImplTest{
 
     private lateinit var repo: DataEncryptRepositoryImpl
     private lateinit var keyPairLocalDataStore: KeyPairLocalDataStore
+    private lateinit var serverPublicKey: ServerPublicKey
 
     @Before
     fun beforeAll() {
         keyPairLocalDataStore = mockk()
-        repo = DataEncryptRepositoryImpl(FakeData.publicKey, keyPairLocalDataStore, CoroutineDispatchersImpl())
+        serverPublicKey = mockk()
 
+        repo = DataEncryptRepositoryImpl(serverPublicKey, keyPairLocalDataStore, CoroutineDispatchersImpl())
+        coEvery { serverPublicKey.value } returns FakeData.publicKey
         coEvery { keyPairLocalDataStore.getPrivateKeyAsString() } returns FakeData.privateKey
     }
 
