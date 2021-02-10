@@ -6,6 +6,7 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.amshove.kluent.shouldNotBeNullOrEmpty
+import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Test
 
@@ -27,12 +28,13 @@ internal class DataEncryptRepositoryImplTest{
         serverPublicKey = mockk()
 
         repo = DataEncryptRepositoryImpl(serverPublicKey, keyPairLocalDataStore, CoroutineDispatchersImpl())
-        coEvery { serverPublicKey.value } returns FakeData.publicKey
+
         coEvery { keyPairLocalDataStore.getPrivateKeyAsString() } returns FakeData.privateKey
     }
 
     @Test
     fun `Encrypt data by using Key pair`() {
+        coEvery { serverPublicKey.value } returns FakeData.publicKey
         val encryptedData = runBlocking { repo.encryptDataByUsingAESSecretKey("Yoyoy") }
         println(encryptedData)
         encryptedData.shouldNotBeNullOrEmpty()
