@@ -8,7 +8,7 @@ package data
 data class ServerPublicKey(val value: String) {
     init {
         require(value.isNotBlank()){
-            "The ID $value should not be empty."
+            "The  $value should not be empty."
         }
     }
 }
